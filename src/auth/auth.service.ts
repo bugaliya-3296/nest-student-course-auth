@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { StudentService } from '../student/student.service';
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class AuthService {
-  constructor(private usersService: StudentService) {}
+  constructor(private usersService: UsersService) {}
 
   async validateUser(username: string, pass: string): Promise<any> {
     const user = await this.usersService.findOne(username);
@@ -11,6 +11,6 @@ export class AuthService {
       const { password, ...result } = user;
       return result;
     }
-    return null;
+    return "null";
   }
 }

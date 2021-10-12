@@ -2,7 +2,10 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { StudentModule } from './student/student.module';
 import { CourseModule } from './course/course.module';
-
+import { AuthModule } from './auth/auth.module';
+import { AppController } from './app.controller'
+import { UsersService } from './users/users.service';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -17,9 +20,9 @@ import { CourseModule } from './course/course.module';
       autoLoadEntities: true,
       synchronize: false    ,
     }),
-    StudentModule,CourseModule,
+     StudentModule,CourseModule, AuthModule, UsersModule
   ],
-  controllers: [],
-  providers: [],
+  controllers: [ AppController ],
+  providers: [UsersService],
 })
 export class AppModule {}
