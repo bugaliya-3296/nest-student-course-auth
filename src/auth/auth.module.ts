@@ -13,6 +13,8 @@ import { JwtModule } from '@nestjs/jwt';
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '60s' },
     })],
-  providers: [AuthService, LocalStrategy]
+  providers: [AuthService, LocalStrategy],
+  exports: [AuthService],
+
 })
 export class AuthModule {}
