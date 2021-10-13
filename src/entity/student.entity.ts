@@ -1,13 +1,20 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 // import { StudentCourse } from './course.student.entity';
-import { CourseTable  } from './course.entity';
+import { CourseTable } from './course.entity';
 import { StudentCourseTable } from './student.course.entity';
 
-@Entity({name: 'students'})
+@Entity({ name: 'students' })
 export class StudentsTable {
   @ApiProperty()
-  @PrimaryGeneratedColumn({type: 'bigint'})
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   mobile: string;
 
   @ApiProperty()
@@ -24,7 +31,7 @@ export class StudentsTable {
 
   @ApiProperty()
   @Column('text', { nullable: true })
-  address?: string;    
+  address?: string;
 
   @ApiProperty()
   @Column('timestamp', {
@@ -44,9 +51,8 @@ export class StudentsTable {
 
   @OneToMany(
     () => StudentCourseTable,
-    (student: StudentCourseTable) => student.students
+    (student: StudentCourseTable) => student.students,
   )
   studentsCourses: StudentCourseTable[];
   // studentsCourses: Array<StudentCourseTable>;
-
 }

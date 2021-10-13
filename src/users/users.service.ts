@@ -33,9 +33,9 @@ export class UsersService {
 
       if (student.length === 0) {
         const newUser = {
-        email : username,
-        password : '1234567890',
-        }
+          email: username,
+          password: '1234567890',
+        };
         console.log('user table is empty .......');
         // throw new Error('User not found');
         await this.userRepo.save(newUser);

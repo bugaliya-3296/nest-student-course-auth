@@ -1,20 +1,22 @@
-import { Module, NestModule, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
+import {
+  Module,
+  NestModule,
+  MiddlewareConsumer,
+  RequestMethod,
+} from '@nestjs/common';
 import { StudentController } from './student.controller';
 import { StudentService } from './student.service';
 // import { ValidStudentMiddleware } from "../common/middlewares/validStudent.middleware"
-import { StudentsTable }  from '../entity/student.entity'
-import { TypeOrmModule } from '@nestjs/typeorm'
+import { StudentsTable } from '../entity/student.entity';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([StudentsTable])
-  ],
+  imports: [TypeOrmModule.forFeature([StudentsTable])],
   controllers: [StudentController],
   providers: [StudentService],
-  exports: [StudentService]
+  exports: [StudentService],
 })
-
-export class StudentModule{}
+export class StudentModule {}
 //  implements NestModule {
 //     configure(consumer: MiddlewareConsumer) {
 //       consumer.apply(ValidStudentMiddleware).forRoutes({
@@ -26,4 +28,4 @@ export class StudentModule{}
 //         method: RequestMethod.PUT
 //       });
 //     }
-  // }
+// }

@@ -1,8 +1,15 @@
-import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { StudentCourseTable } from './student.course.entity';
 import { StudentsTable } from './student.entity';
 
-@Entity({name: 'courses'})
+@Entity({ name: 'courses' })
 export class CourseTable {
   @PrimaryGeneratedColumn()
   courseId: string;
@@ -26,14 +33,13 @@ export class CourseTable {
     name: 'created_at',
   })
   created_at!: Date;
-  
+
   // @ManyToMany(()=> StudentsTable, student => student.courseData )
   // @JoinTable()
   // studentsData: StudentsTable[]
   @OneToMany(
     () => StudentCourseTable,
-    (courseInfo: StudentCourseTable) => courseInfo.courses
+    (courseInfo: StudentCourseTable) => courseInfo.courses,
   )
   studentsCourses: Array<StudentCourseTable>;
-
 }

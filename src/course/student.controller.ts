@@ -43,7 +43,7 @@ export class StudentCourseController {
       const isCourseAvailable = await this.courseService.findCourse(
         body.courseDetails.courseId,
       );
-      console.log('isCourseAvailable--->>>>', isCourseAvailable)
+      console.log('isCourseAvailable--->>>>', isCourseAvailable);
 
       return this.courseService.addStudentCourse(body);
     } catch (error) {

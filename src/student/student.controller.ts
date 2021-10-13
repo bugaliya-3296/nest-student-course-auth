@@ -8,17 +8,14 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common';
-import {
-  CreateStudentDto,
-} from './dto/student.dto';
+import { CreateStudentDto } from './dto/student.dto';
 import { StudentService } from './student.service';
-import { StudentsTable } from '../entity/student.entity'
+import { StudentsTable } from '../entity/student.entity';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-
 
 @Controller('student')
 export class StudentController {
-  constructor(private readonly studentService: StudentService) { }
+  constructor(private readonly studentService: StudentService) {}
   @UseGuards(JwtAuthGuard)
   @Get()
   getStudent(): Promise<StudentsTable[]> {

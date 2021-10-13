@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { StudentModule } from './student/student.module';
 import { CourseModule } from './course/course.module';
 import { AuthModule } from './auth/auth.module';
-import { AppController } from './app.controller'
+import { AppController } from './app.controller';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -17,11 +17,14 @@ import { UsersModule } from './users/users.module';
       database: 'test',
       // entities: [],
       autoLoadEntities: true,
-      synchronize: false    ,
+      synchronize: false,
     }),
-     StudentModule,CourseModule, AuthModule, UsersModule
+    StudentModule,
+    CourseModule,
+    AuthModule,
+    UsersModule,
   ],
-  controllers: [ AppController ],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule {}

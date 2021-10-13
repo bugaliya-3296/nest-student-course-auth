@@ -5,8 +5,7 @@ import { StudentsTable } from 'src/entity/student.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 // const studentRepository = getRepository(StudentsTable); // you can also get it via getConnection().getRepository() or getManager().getRepository()
-import { CourseTable  } from 'src/entity/course.entity';
-
+import { CourseTable } from 'src/entity/course.entity';
 
 @Injectable()
 export class StudentService {
@@ -71,13 +70,12 @@ export class StudentService {
       return await this.studentRepository.findOne({
         where: { mobile: studentId },
       });
-       
     } catch (error) {
       return error;
     }
   }
 
-  async addStudentCourse( req: any){
+  async addStudentCourse(req: any) {
     // console.log('=====find me here===', req)
     // const studentId = req.studentsDetails.mobile;
     // let student = await this.studentRepository.find({
@@ -87,30 +85,28 @@ export class StudentService {
     // if (student.length === 0) {
     //   throw new Error('User not found, Please Do register befor');
     // }
-try{
-    let newCourseStudent = new CourseTable();
+    try {
+      let newCourseStudent = new CourseTable();
 
-    newCourseStudent.courseCode = req.courseDetails.courseCode;
-    newCourseStudent.courseId = req.courseDetails.courseId;
-    newCourseStudent.courseName = req.courseDetails.courseName;
-    
-    let addCourse = [];
+      newCourseStudent.courseCode = req.courseDetails.courseCode;
+      newCourseStudent.courseId = req.courseDetails.courseId;
+      newCourseStudent.courseName = req.courseDetails.courseName;
 
-    for(let index = 0 ;index < req.studentDetails; index = index +1){
+      let addCourse = [];
 
-    const studentInfo = await this.studentRepository.find({
-        where: { mobile: req.studentDetails[index].mobile },
-      });
-      let studentTest = studentInfo[0]//= new StudentsTable();
-      // studentTest.
-      // newCourseStudent.studentsData.push(studentTest);
+      for (let index = 0; index < req.studentDetails; index = index + 1) {
+        const studentInfo = await this.studentRepository.find({
+          where: { mobile: req.studentDetails[index].mobile },
+        });
+        let studentTest = studentInfo[0]; //= new StudentsTable();
+        // studentTest.
+        // newCourseStudent.studentsData.push(studentTest);
+      }
+      const temp = await this.studentRepository.save(newCourseStudent);
+      return temp;
+    } catch (error) {
+      return error;
     }
-    const temp = await this.studentRepository.save(newCourseStudent);
-    return temp;
-  }catch(error){
-    return error;
-    
-  }
   }
   async findOne(username: string): Promise<StudentsTable | undefined> {
     // return this.studentRepository.find(user => user. === username);
@@ -122,7 +118,6 @@ try{
   // getStudentsByCourseId(teacherId: string) {
   // return 'get Students By CourseId calling';
   // }
-
 
   // updateStudentCourse(courseId: string, studentId: string) {
   // let updatedStudent;
