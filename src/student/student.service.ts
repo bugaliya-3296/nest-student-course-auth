@@ -78,27 +78,39 @@ export class StudentService {
   }
 
   async addStudentCourse( req: any){
-    const studentId = req.studentsDetails.mobile;
-    let student = await this.studentRepository.find({
-      where: { mobile: studentId },
-    });
+    // console.log('=====find me here===', req)
+    // const studentId = req.studentsDetails.mobile;
+    // let student = await this.studentRepository.find({
+    //   where: { mobile: studentId },
+    // });
 
-    if (student.length === 0) {
-      throw new Error('User not found, Please Do register befor');
-    }
+    // if (student.length === 0) {
+    //   throw new Error('User not found, Please Do register befor');
+    // }
+try{
+    let newCourseStudent = new CourseTable();
 
+    newCourseStudent.courseCode = req.courseDetails.courseCode;
+    newCourseStudent.courseId = req.courseDetails.courseId;
+    newCourseStudent.courseName = req.courseDetails.courseName;
+    
     let addCourse = [];
 
-    for(let index = 0 ;index < req.courseDetails; index = index +1){
-      let course = new CourseTable();
+    for(let index = 0 ;index < req.studentDetails; index = index +1){
 
-      course.courseCode
-      course.courseId
-      course.courseName
-
-      // student.courseData.push(course);
+    const studentInfo = await this.studentRepository.find({
+        where: { mobile: req.studentDetails[index].mobile },
+      });
+      let studentTest = studentInfo[0]//= new StudentsTable();
+      // studentTest.
+      // newCourseStudent.studentsData.push(studentTest);
     }
-    return ' selected course for student'
+    const temp = await this.studentRepository.save(newCourseStudent);
+    return temp;
+  }catch(error){
+    return error;
+    
+  }
   }
   async findOne(username: string): Promise<StudentsTable | undefined> {
     // return this.studentRepository.find(user => user. === username);

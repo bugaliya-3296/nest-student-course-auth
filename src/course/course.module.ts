@@ -5,13 +5,15 @@ import { CourseController } from './course.controller';
 import { CourseService } from './course.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CourseTable } from '../entity/course.entity'
+import { StudentsTable } from 'src/entity/student.entity';
+import { StudentCourseTable } from 'src/entity/student.course.entity';
 
 
 @Module({
   imports: [ StudentModule,
-    TypeOrmModule.forFeature([CourseTable])
+    TypeOrmModule.forFeature([CourseTable, StudentsTable, StudentCourseTable])
   ],
-  controllers: [CourseController],//, StudentCourseController],
+  controllers: [CourseController, StudentCourseController],
   providers: [CourseService]
 })
 

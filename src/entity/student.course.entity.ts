@@ -1,28 +1,25 @@
 import {
     BaseEntity,
+    Column,
     Entity,
     JoinColumn,
     ManyToOne,
-    PrimaryColumn
+    PrimaryColumn,
+    PrimaryGeneratedColumn
   } from "typeorm";
   import { StudentsTable } from "./student.entity";
   import { CourseTable } from "./course.entity";
   
-  @Entity()
-  export class StudentCourse extends BaseEntity {
-    @PrimaryColumn({type: 'bigint'})
-    mobile: string;
+  @Entity({name: 'students_courses'})
+  export class StudentCourseTable extends BaseEntity {
+    @Column({type: 'bigint'})
+    Id: number;
   
-    @PrimaryColumn()
-    courseId: number;
+    @ManyToOne(() => StudentsTable, (student: StudentsTable) => student.studentsCourses, {primary: true })
+    @JoinColumn({ name: 'student_id'})
+    students: StudentsTable;
   
-    // @ManyToOne(() => Author, author => author.bookConnection, { primary: true })
-    // @JoinColumn({ name: "authorId" })
-    // author: Promise<Student>;
-  
-    // @ManyToOne(() => Book, book => book.authorConnection, {
-    //   primary: true
-    // })
-    // @JoinColumn({ name: "bookId" })
-    // book: Promise<Course>;
+    @ManyToOne(() => CourseTable, (course: CourseTable) => course.studentsCourses, {primary: true })
+    @JoinColumn({ name: 'course_id' })
+    courses: CourseTable;
   }

@@ -11,7 +11,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
   ],
   controllers: [StudentController],
   providers: [StudentService],
-  // exports: [StudentService]
+  exports: [StudentService]
 })
 
 export class StudentModule{}

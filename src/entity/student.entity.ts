@@ -2,8 +2,9 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 // import { StudentCourse } from './course.student.entity';
 import { CourseTable  } from './course.entity';
+import { StudentCourseTable } from './student.course.entity';
 
-@Entity('studentsTable')
+@Entity({name: 'students'})
 export class StudentsTable {
   @ApiProperty()
   @PrimaryGeneratedColumn({type: 'bigint'})
@@ -41,12 +42,11 @@ export class StudentsTable {
   })
   created_at!: Date;
 
-  @ManyToMany(()=> CourseTable, course => course.studentsData )
-  @JoinTable()
-  courseData: CourseTable[]
-
-  @ApiProperty()
-  @Column()
-  password: string;
+  @OneToMany(
+    () => StudentCourseTable,
+    (student: StudentCourseTable) => student.students
+  )
+  studentsCourses: StudentCourseTable[];
+  // studentsCourses: Array<StudentCourseTable>;
 
 }
