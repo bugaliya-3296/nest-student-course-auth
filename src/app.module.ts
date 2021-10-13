@@ -4,7 +4,6 @@ import { StudentModule } from './student/student.module';
 import { CourseModule } from './course/course.module';
 import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller'
-import { UsersService } from './users/users.service';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -23,6 +22,6 @@ import { UsersModule } from './users/users.module';
      StudentModule,CourseModule, AuthModule, UsersModule
   ],
   controllers: [ AppController ],
-  providers: [UsersService],
+  providers: [],
 })
 export class AppModule {}
