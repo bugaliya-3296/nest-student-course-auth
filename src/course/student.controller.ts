@@ -6,11 +6,13 @@ import {
   ParseUUIDPipe,
   Post,
   Body,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateStudentDto } from '../student/dto/student.dto';
 import { StudentService } from '../student/student.service';
 import { StudentsTable } from '../entity/student.entity';
 import { CourseService } from './course.service';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 // @Controller('course/:courseId/students')
 @Controller('course/students')
@@ -20,6 +22,7 @@ export class StudentCourseController {
     private readonly courseService: CourseService,
   ) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get('/:courseId')
   getStudentsBycourseId(
     @Param('courseId') courseId: string,
@@ -28,6 +31,7 @@ export class StudentCourseController {
     return this.courseService.getStudentsBycourseId(courseId);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   async addStudentCourse(@Body() body: any): Promise<any> {
     try {

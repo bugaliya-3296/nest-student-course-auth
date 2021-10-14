@@ -3,7 +3,6 @@ import {
   Controller,
   Get,
   Param,
-  ParseUUIDPipe,
   Post,
   Put,
   UseGuards,
@@ -22,6 +21,7 @@ export class StudentController {
     return this.studentService.getStudents();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('/:studentId')
   getStudentById(
     @Param('studentId') studentId: string,
@@ -29,11 +29,13 @@ export class StudentController {
     return this.studentService.getStudentById(studentId);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   createStudent(@Body() body: CreateStudentDto): Promise<StudentsTable> {
     return this.studentService.createStudent(body);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put('/:studentId')
   updateStudent(
     @Param('studentId') studentId: string,
