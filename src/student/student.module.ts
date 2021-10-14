@@ -9,10 +9,13 @@ import { StudentService } from './student.service';
 // import { ValidStudentMiddleware } from "../common/middlewares/validStudent.middleware"
 import { StudentsTable } from '../entity/student.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { StudentCourseTable } from 'src/entity/student.course.entity';
+import { CourseStudentController } from './course.controller';
+import { CourseTable } from 'src/entity/course.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([StudentsTable])],
-  controllers: [StudentController],
+  imports: [TypeOrmModule.forFeature([StudentsTable, StudentCourseTable, CourseTable])],
+  controllers: [StudentController, CourseStudentController],
   providers: [StudentService],
   exports: [StudentService],
 })

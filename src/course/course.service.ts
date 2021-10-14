@@ -126,4 +126,13 @@ export class CourseService {
       return error;
     }
   }
+  async getStudentsBycourseId(courseId: string): Promise<any[]> {
+    console.log('getting all student associated with course id', courseId);
+
+    return await this.studentCourseRepository
+      .createQueryBuilder('students_courses')
+      .where('students_courses.course_id= :course_id', { course_id: courseId })
+      .leftJoinAndSelect('students_courses.students', 'students')
+      .getMany();
+  }
 }

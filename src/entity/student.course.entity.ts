@@ -2,6 +2,7 @@ import {
   BaseEntity,
   Column,
   Entity,
+  Generated,
   JoinColumn,
   ManyToOne,
   PrimaryColumn,
@@ -13,6 +14,7 @@ import { CourseTable } from './course.entity';
 @Entity({ name: 'students_courses' })
 export class StudentCourseTable extends BaseEntity {
   @Column({ type: 'bigint' })
+  @Generated('increment')
   Id: number;
 
   @ManyToOne(

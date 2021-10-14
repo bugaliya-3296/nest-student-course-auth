@@ -20,22 +20,13 @@ export class StudentCourseController {
     private readonly courseService: CourseService,
   ) {}
 
-  // @Get()
-  // getStudents(
-  //     @Param('courseId', new ParseUUIDPipe()) courseId: string
-  // ): Promise<StudentsTable[]> {
-  //     return this.studentService.getStudentsBycourseId(courseId)
-  // }
-
-  // @Put('/:studentId',)
-  // updateStudentCourse(
-  //     @Param('courseId', new ParseUUIDPipe()) courseId: string,
-  //     @Param('studentId', new ParseUUIDPipe()) studentId: string
-  // ): Promise<StudentsTable> {
-  //     return this.studentService.updateStudentCourse(courseId, studentId)
-  // }
-
-  //   createCourse(@Body() body: CreateCourseDto): Promise<CourseTable> {
+  @Get('/:courseId')
+  getStudentsBycourseId(
+    @Param('courseId') courseId: string,
+  ): Promise<StudentsTable[]> {
+    console.log('-------------------', courseId);
+    return this.courseService.getStudentsBycourseId(courseId);
+  }
 
   @Post()
   async addStudentCourse(@Body() body: any): Promise<any> {
